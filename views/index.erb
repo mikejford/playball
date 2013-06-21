@@ -1,0 +1,17 @@
+<div class="row">
+  <% for color in @colors %>
+    <div class="span3">
+      <div class="control-box color <%= color %>"></div>
+    </div>
+  <% end %>
+</div>
+
+<div class="row">
+  <% for shape in @shapes %>
+    <div class="span3">
+      <div class="control-box shape <%= shape %> <% if settings.development? %>text-center<% end %>">
+      <% if settings.development? %> <%= shape %> <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

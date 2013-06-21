@@ -1,0 +1,38 @@
+$color-names: red, green, blue, purple;
+$color-values: $red, $green, $blue, $purple;
+$shape-names: triangle, square, pentagon, circle;
+
+body {
+  padding-top: 100px;
+}
+
+.row {
+  padding-bottom: 50px;
+}
+
+.control-box {
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+}
+
+@each $color in $color-names {
+  $value: nth($color-values, index($color-names, $color));
+  .#{$color} {
+    background-color: $value;
+
+    &:hover {
+      background-color: lighten($value, 10%);
+    }
+  }
+}
+
+@each $shape in $shape-names {
+  .#{$shape} {
+    background-color: $grayLighter;
+
+    &:hover {
+      background-color: lighten($grayLighter, 10%);
+    }
+  }
+}
