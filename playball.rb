@@ -2,6 +2,12 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'compass'
 
+require './lib/sphero'
+require 'pry' if development?
+
+SPHERO = SpheroRobot.new(:connections => {:sphero => {:port => '127.0.0.1:4560'}})
+SPHERO.connections[:sphero].connect if !SPHERO.connections[:sphero].connected?
+
 configure do
   set :asset_path, Proc.new { (settings.environment == :production) ? 'public' : 'assets' }
 
@@ -12,10 +18,14 @@ configure do
 end
 
 get '/control-box' do
+  
   if params[:shape]
     params[:shape]
   else
-    params[:color]
+    m = /rgb\((?<r>\d+),\s*(?<g>\d+),\s*(?<b>\d+)\)/.match(params[:color])
+    color = [m[:r].to_i, m[:g].to_i, m[:b].to_i]
+    SPHERO.change_color(color)
+    color.inspect
   end
 end
 

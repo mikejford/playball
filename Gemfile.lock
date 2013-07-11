@@ -1,12 +1,28 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    artoo (1.0.0.pre)
+      celluloid (~> 0.14.0)
+      celluloid-io (~> 0.14.0)
+      multi_json (~> 1.6)
+      pry (~> 0.9)
+      rake (~> 10.0)
+      reel (~> 0.4.pre)
+    artoo-sphero (1.0.0.pre)
+      artoo (~> 1.0.0.pre)
+      hybridgroup-sphero (~> 1.3.0)
     backports (3.3.2)
     binding_of_caller (0.7.1)
       debug_inspector (>= 0.0.1)
     bond (0.4.3)
     bootstrap-sass (2.3.1.3)
       sass (~> 3.2)
+    celluloid (0.14.1)
+      timers (>= 1.0.0)
+    celluloid-io (0.14.1)
+      celluloid (>= 0.14.1)
+      nio4r (>= 0.4.5)
+    certified (0.1.1)
     chunky_png (1.2.8)
     coderay (1.0.9)
     coffee-script (2.2.0)
@@ -30,6 +46,11 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     fssm (0.2.10)
+    http (0.4.0)
+      certified
+      http_parser.rb
+    http_parser.rb (0.5.3)
+    hybridgroup-sphero (1.3.0)
     interception (0.3)
     jist (1.5.1)
       json
@@ -37,6 +58,7 @@ GEM
     libv8 (3.11.8.17)
     method_source (0.8.1)
     multi_json (1.7.6)
+    nio4r (0.4.6)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -69,6 +91,13 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rake (10.1.0)
+    reel (0.4.0.pre)
+      celluloid-io (>= 0.8.0)
+      http (>= 0.2.0)
+      http_parser.rb (>= 0.5.3)
+      rack (>= 1.4.0)
+      websocket_parser (>= 0.1.2)
     ref (1.0.5)
     sass (3.2.9)
     sinatra (1.4.3)
@@ -91,12 +120,17 @@ GEM
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
     tilt (1.4.1)
+    timers (1.1.0)
+    websocket_parser (0.1.4)
+      http
     yard (0.8.6.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  artoo (~> 1.0.0.pre)
+  artoo-sphero (~> 1.0.0.pre)
   bootstrap-sass (~> 2.3.1.2)
   coffee-script (~> 2.2.0)
   compass (~> 0.12.2)
