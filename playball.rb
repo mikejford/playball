@@ -8,6 +8,31 @@ require 'pry' if development?
 SPHERO = SpheroRobot.new(:connections => {:sphero => {:port => '127.0.0.1:4560'}})
 SPHERO.connections[:sphero].connect if !SPHERO.connections[:sphero].connected?
 
+SHAPES = {
+  :circle =>
+  {
+    :sides => 36,
+    :rolltime => 0.25,
+    :stoptime => 0.1
+  },
+  
+  :square =>
+  {
+    :sides => 4,
+  },
+  
+  :triangle =>
+  {
+    :sides => 3,
+  },
+  
+  :pentagon =>
+  {
+    :sides => 5,
+    :rolltime => 1.8
+  }
+}
+
 configure do
   set :asset_path, Proc.new { (settings.environment == :production) ? 'public' : 'assets' }
 
@@ -18,9 +43,10 @@ configure do
 end
 
 get '/control-box' do
-  
   if params[:shape]
-    params[:shape]
+    SPHERO.set_shape(SHAPES[params[:shape].to_sym])
+    SPHERO.make_polygon
+    
   else
     m = /rgb\((?<r>\d+),\s*(?<g>\d+),\s*(?<b>\d+)\)/.match(params[:color])
     color = [m[:r].to_i, m[:g].to_i, m[:b].to_i]

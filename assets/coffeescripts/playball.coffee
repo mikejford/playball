@@ -11,4 +11,4 @@ sendControlMessage = (e) ->
     type: "GET"
     data: dataObj
     error: -> alert 'Whoops!'
-    success: (data) -> alert "In sendControlMessage: #{data}"
+    success: (data) -> 

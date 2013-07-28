@@ -9,7 +9,7 @@
 <div class="row">
   <% for shape in @shapes %>
     <div class="span3">
-      <div class="control-box shape <%= shape %> <% if settings.development? %>text-center<% end %>">
+      <div class="<% if settings.development? %>text-center<% end %> control-box shape <%= shape %>">
       <% if settings.development? %> <%= shape %> <% end %>
       </div>
     </div>

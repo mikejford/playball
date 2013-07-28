@@ -9,23 +9,27 @@ class SpheroRobot < Artoo::Robot
   HEADING_MIN = 0
   HEADING_MAX = 360
 
-  def initialize(params={})
+  def initialize(params = {})
     super(params)
-
-    params = defaults.merge(params)
-    @sides = params[:sides]
-    @speed = params[:speed]
-    @rolltime = params[:rolltime]
-    @stoptime = params[:stoptime]
+    set_shape(params)
   end
 
   def defaults
     {
       :sides => 3,
-      :speed => 150,
+      :speed => 100,
       :rolltime => 2,
-      :stoptime => 0.1,
+      :stoptime => 1,
     }
+  end
+
+  def set_shape(shape = {})
+    shape = defaults.merge(shape)
+    
+    @sides = shape[:sides]
+    @speed = shape[:speed]
+    @rolltime = shape[:rolltime]
+    @stoptime = shape[:stoptime]
   end
 
   def make_polygon
@@ -36,10 +40,10 @@ class SpheroRobot < Artoo::Robot
 
   def do_side(heading)
     sphero.roll speed, heading
-    sphero.keep_going rolltime
+    Kernel::sleep rolltime
 
     sphero.stop
-    sphero.keep_going stoptime
+    Kernel::sleep stoptime
   end
 
   def side_range
@@ -62,16 +66,3 @@ class SpheroRobot < Artoo::Robot
     [ rand(255), rand(255), rand(255) ]
   end
 end
-
-
-# circle
-# {
-# :sides => 36,
-#   :speed => 150,
-#   :rolltime => 0.25
-# }
-
-# square
-# {
-# :sides => 4,
-# }
